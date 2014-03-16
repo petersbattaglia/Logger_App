@@ -21,12 +21,19 @@ namespace LoggerApp
             {
                 if(i == 20)
                 {
-                    OnWorkDone(new WorkerEventArgs(string.Format("MultiLine log item.{1}Iteration {0}{1}Extra Information.", (i + 1), Environment.NewLine)));
+                    OnWorkDone(
+                        new WorkerEventArgs(
+                            string.Format("MultiLine log item.{1}Iteration {0}{1}Extra Information.", 
+                            (i + 1), 
+                            Environment.NewLine)));
                     Thread.Sleep(8000);
                 }
                 else
                 {
-                    OnWorkDone(new WorkerEventArgs(string.Format("Iteration #{0} Complete.", (i + 1).ToString())));
+                    OnWorkDone(
+                        new WorkerEventArgs(
+                            string.Format("Iteration #{0} Complete.", 
+                            (i + 1))));
                     Thread.Sleep(200);
                 }
             }

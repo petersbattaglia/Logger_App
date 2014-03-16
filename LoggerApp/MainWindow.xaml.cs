@@ -31,6 +31,8 @@ namespace LoggerApp
                 return _Log;
             }
         }
+
+        private Action<string> addtoLogAction;
         
         public MainWindow()
         {
@@ -38,6 +40,8 @@ namespace LoggerApp
 
             Worker.WorkDone += Worker_WorkDone;
             Worker.WorkCompleted += Worker_WorkCompleted;
+
+            addtoLogAction = AddToLog;
         }
 
         void Worker_WorkCompleted(object sender, WorkerEventArgs e)
@@ -47,10 +51,10 @@ namespace LoggerApp
 
         void Worker_WorkDone(object sender, WorkerEventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action<string>(AddToLog), e.Message);
+            Dispatcher.BeginInvoke(addtoLogAction, e.Message);
         }
 
-        public void AddToLog(string message)
+        private void AddToLog(string message)
         {
             Log.Add(message);
 
