@@ -1,0 +1,10 @@
+﻿<Window x:Class="LoggerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" x:Name="winLogWindow">
+    <Grid>
+        <ListBox x:Name="lbLogger" Margin="10,10,10,52" ItemsSource="{Binding Log, ElementName=winLogWindow}" VirtualizingPanel.IsVirtualizing="True" />
+        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="10,0,0,9" VerticalAlignment="Bottom" Width="75" Click="btnStart_Click"/>
+        
+    </Grid>
+</Window>
