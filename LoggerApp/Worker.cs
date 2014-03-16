@@ -17,10 +17,18 @@ namespace LoggerApp
 
         public static void DoWork()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 100; i++)
             {
-                Thread.Sleep(2000);
-                OnWorkDone(new WorkerEventArgs(string.Format("Iteration #{0} Complete.", (i + 1).ToString())));
+                if(i == 20)
+                {
+                    OnWorkDone(new WorkerEventArgs(string.Format("MultiLine log item.{1}Iteration {0}{1}Extra Information.", (i + 1), Environment.NewLine)));
+                    Thread.Sleep(8000);
+                }
+                else
+                {
+                    OnWorkDone(new WorkerEventArgs(string.Format("Iteration #{0} Complete.", (i + 1).ToString())));
+                    Thread.Sleep(200);
+                }
             }
 
             OnWorkCompleted(new WorkerEventArgs("All done."));

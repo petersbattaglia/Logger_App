@@ -47,16 +47,28 @@ namespace LoggerApp
 
         void Worker_WorkDone(object sender, WorkerEventArgs e)
         {
-            Dispatcher.BeginInvoke(
-                new Action(() => 
-                { 
-                    Log.Insert(0, e.Message); 
-                }));
+            Dispatcher.BeginInvoke(new Action<string>(AddToLog), e.Message);
+        }
+
+        public void AddToLog(string message)
+        {
+            Log.Add(message);
+
+            // Maintain position at the bottom of the listbox
+            lbLogger.ScrollIntoView(lbLogger.Items[lbLogger.Items.Count - 1]);
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             new Thread(() => { Worker.DoWork(); }).Start();
+        }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            if(lbLogger.SelectedItems.Count > 0)
+            {
+                Clipboard.SetText(string.Join(Environment.NewLine, lbLogger.SelectedItems.Cast<string>()));
+            }
         }
     }
 }
